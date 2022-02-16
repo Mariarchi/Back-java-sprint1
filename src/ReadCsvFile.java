@@ -3,11 +3,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class ReadCsvFile {
-    public static String readFileContentsOrNull(String path) { // было private String readFileContentsOrNull(String path)
+    public static String readFileContentsOrNull(String path) {
         try {
             return Files.readString(Path.of(path));
         } catch (IOException e) {
-            System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно, файл не находится в нужной директории.");
+            System.out.println("Невозможно прочитать файл с месячным отчётом. " +
+                    "Возможно, файл не находится в нужной директории.");
             return null;
         }
     }
@@ -24,9 +25,7 @@ public class ReadCsvFile {
             monthReportRecord.isExpense.add(Boolean.parseBoolean(lineContents[1]));
             monthReportRecord.quantity.add(Integer.parseInt(lineContents[2]));
             monthReportRecord.sumOfOne.add(Integer.parseInt(lineContents[3]));
-
         }
-
         return monthReportRecord;
     }
 
@@ -41,9 +40,7 @@ public class ReadCsvFile {
             yearReportRecord.month.add(lineContents[0]);
             yearReportRecord.amount.add(Integer.parseInt(lineContents[1]));
             yearReportRecord.isExpense.add(Boolean.parseBoolean(lineContents[2]));
-
         }
-
         return yearReportRecord;
     }
 }
