@@ -1,11 +1,28 @@
 public class YearlyReport {
     public static int PrintProfit(YearReport monthProfit, int monthIndex) {
-        if (monthProfit.month.get(monthIndex).equals("01")) {
-            return monthProfit.amount.get(0) - monthProfit.amount.get(1);
-        } else if (monthProfit.month.get(monthIndex).equals("02")) {
-            return monthProfit.amount.get(2) - monthProfit.amount.get(3);
-        } else {
-            return monthProfit.amount.get(4) - monthProfit.amount.get(5);
+        int expense = 0;
+        int income = 0;
+
+        // ищем доход и расход за указанный месяц
+        for (int i = 0; i < monthProfit.month.size(); i++) {
+            if (("0" + monthIndex).equals(monthProfit.month.get(i))) {
+                if (monthProfit.isExpense.get(i)) {
+                    expense = monthProfit.amount.get(i);
+                } else {
+                    income = monthProfit.amount.get(i);
+                }
+            }
         }
+        return income - expense;
+    }
+
+    public static int AvarageExpensesProfit(YearReport monthsExpensesProfit, boolean expensesOrProfit) {
+        int monthTotal = 0;
+        for (int i = 0; i < monthsExpensesProfit.month.size(); i++) {
+            if (monthsExpensesProfit.isExpense.get(i) == expensesOrProfit) {
+                monthTotal += monthsExpensesProfit.amount.get(i);
+            }
+        }
+        return monthTotal / (monthsExpensesProfit.month.size() / 2);
     }
 }

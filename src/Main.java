@@ -7,33 +7,32 @@ public class Main {
         final int NUMBER_OF_MONTH_REPORT = 3;
         MonthReport[] monthReport = new MonthReport[NUMBER_OF_MONTH_REPORT];
         YearReport yearReport = new YearReport();
-        String fileContentsMonth = null; // переменная должна быть в глобальной зоне видимости
-        String fileContentsYear = null; // переменная должна быть в глобальной зоне видимости
+        // переменные должны быть в глобальной зоне видимости для реализации логики
+        String fileContentsMonth = null;
+        String fileContentsYear = null;
 
         while (true) {
             PrintMenu();
             int command = scanner.nextInt();
             switch (command) {
-                case 1: // считываем все месячные отчёты
+                case 1:
                     for (int i = 1; i <= NUMBER_OF_MONTH_REPORT; i++) {
                         fileContentsMonth = ReadCsvFile.readFileContentsOrNull("resources/" + "m.20210"
                                 + i + ".csv");
-                        //System.out.println(fileContents);
                         if (fileContentsMonth != null) {
                             monthReport[i - 1] = ReadCsvFile.splitMonthLine(fileContentsMonth);
                             System.out.println("Отчёт за месяц " + GetMonth(i) + " был успешно загружен\n");
                         }
                     }
                     break;
-                case 2: // считываем отчёт за год
+                case 2:
                     fileContentsYear = ReadCsvFile.readFileContentsOrNull("resources/y.2021.csv");
-                    //System.out.println(fileContents);
                     if (fileContentsYear != null) {
                         yearReport = ReadCsvFile.splitYearLine(fileContentsYear);
                         System.out.println("Отчёт за год был успешно загружен\n");
                     }
                     break;
-                case 3: // is_expense — одно из двух значений: TRUE или FALSE. Обозначает, является ли запись тратой (TRUE) или доходом (FALSE);
+                case 3:
                     boolean isError = false;
                     if ((fileContentsMonth != null) && (fileContentsYear != null)) {
                         for (int i = 0; i < yearReport.month.size(); i++) {
@@ -50,14 +49,12 @@ public class Main {
                                 if (yearReport.amount.get(i) != MonthlyReport.SumOfExpenses(monthReport[j])) {
                                     System.out.println("Отчёт за месяц " + GetMonth(j)
                                             + " не соответствует отчёту за год!");
-                                    //System.out.println("Трата True " + MonthlyReport.SumOfExpenses(monthReport[j]));
                                     isError = true;
                                 }
                             } else {
                                 if (yearReport.amount.get(i) != MonthlyReport.SumOfIncome(monthReport[j])) {
                                     System.out.println("Отчёт за месяц " + GetMonth(j)
                                             + " не соответствует отчёту за год!");
-                                    //System.out.println("Доход False " + MonthlyReport.SumOfExpenses(monthReport[j]));
                                     isError = true;
                                 }
                             }
@@ -77,7 +74,7 @@ public class Main {
                             int maxSum = monthReport[i].sumOfOne.get(monthIndex)
                                     * monthReport[i].quantity.get(monthIndex);
                             System.out.println("Самый прибыльный товар: " + monthReport[i].itemName.get(monthIndex)
-                                    + " составил: " + maxSum + " у. е.");
+                                    + " вышла на сумму: " + maxSum + " у. е.");
 
                             monthIndex = MonthlyReport.TheBiggestWaste(monthReport[i]);
                             maxSum = monthReport[i].sumOfOne.get(monthIndex) * monthReport[i].quantity.get(monthIndex);
@@ -92,10 +89,13 @@ public class Main {
                     if (fileContentsYear != null) {
                         System.out.println("Рассматриваемый год: " + 2021);
                         for (int i = 0; i < yearReport.month.size() / 2; i++) {
-                            System.out.print("Прибыль за: " + GetMonth(i));
-                            System.out.println(YearlyReport.PrintProfit(yearReport, i * 2));
+                            System.out.print("Прибыль за: " + GetMonth(i) + " составил(-а): ");
+                            System.out.println(YearlyReport.PrintProfit(yearReport, i + 1) + " у. е.");
                         }
-
+                        System.out.println("Средний расход за все месяцы в году составил: "
+                                + YearlyReport.AvarageExpensesProfit(yearReport, true) + " у. е.");
+                        System.out.println("Средний доход за все месяцы в году составил: "
+                                + YearlyReport.AvarageExpensesProfit(yearReport, false) + " у. е.\n");
                     } else {
                         System.out.println("Отчёты за год не были загружены!\n");
                     }
