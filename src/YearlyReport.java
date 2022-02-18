@@ -16,7 +16,7 @@ public class YearlyReport {
         return income - expense;
     }
 
-    public static int AvarageExpensesProfit(YearReport monthsExpensesProfit, boolean expensesOrProfit) {
+    public static int AverageExpensesProfit(YearReport monthsExpensesProfit, boolean expensesOrProfit) {
         int monthTotal = 0;
         for (int i = 0; i < monthsExpensesProfit.month.size(); i++) {
             if (monthsExpensesProfit.isExpense.get(i) == expensesOrProfit) {

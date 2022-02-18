@@ -93,9 +93,9 @@ public class Main {
                             System.out.println(YearlyReport.PrintProfit(yearReport, i + 1) + " у. е.");
                         }
                         System.out.println("Средний расход за все месяцы в году составил: "
-                                + YearlyReport.AvarageExpensesProfit(yearReport, true) + " у. е.");
+                                + YearlyReport.AverageExpensesProfit(yearReport, true) + " у. е.");
                         System.out.println("Средний доход за все месяцы в году составил: "
-                                + YearlyReport.AvarageExpensesProfit(yearReport, false) + " у. е.\n");
+                                + YearlyReport.AverageExpensesProfit(yearReport, false) + " у. е.\n");
                     } else {
                         System.out.println("Отчёты за год не были загружены!\n");
                     }
