@@ -17,18 +17,18 @@ public class Main {
             switch (command) {
                 case 1:
                     for (int i = 1; i <= NUMBER_OF_MONTH_REPORT; i++) {
-                        fileContentsMonth = ReadCsvFile.readFileContentsOrNull("resources/" + "m.20210"
+                        fileContentsMonth = WorkWithCSV.readFileContentsOrNull("resources/" + "m.20210"
                                 + i + ".csv");
                         if (fileContentsMonth != null) {
-                            monthReport[i - 1] = ReadCsvFile.splitMonthLine(fileContentsMonth);
+                            monthReport[i - 1] = WorkWithCSV.splitMonthLine(fileContentsMonth);
                             System.out.println("Отчёт за месяц " + GetMonth(i) + " был успешно загружен\n");
                         }
                     }
                     break;
                 case 2:
-                    fileContentsYear = ReadCsvFile.readFileContentsOrNull("resources/y.2021.csv");
+                    fileContentsYear = WorkWithCSV.readFileContentsOrNull("resources/y.2021.csv");
                     if (fileContentsYear != null) {
-                        yearReport = ReadCsvFile.splitYearLine(fileContentsYear);
+                        yearReport = WorkWithCSV.splitYearLine(fileContentsYear);
                         System.out.println("Отчёт за год был успешно загружен\n");
                     }
                     break;

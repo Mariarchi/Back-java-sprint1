@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="java-sprint1-hw:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/java_sprint1_hw_jar</output-path>
+    <root id="archive" name="java-sprint1-hw.jar">
+      <element id="module-output" name="java-sprint1-hw" />
+      <element id="archive" name="Dima_Task.jar" />
+    </root>
+  </artifact>
+</component>
