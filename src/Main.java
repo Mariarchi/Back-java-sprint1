@@ -10,6 +10,7 @@ public class Main {
         // переменные должны быть в глобальной зоне видимости для реализации логики
         String fileContentsMonth = null;
         String fileContentsYear = null;
+        String pathToCSV = "resources/";
 
         while (true) {
             PrintMenu();
@@ -17,16 +18,16 @@ public class Main {
             switch (command) {
                 case 1:
                     for (int i = 1; i <= NUMBER_OF_MONTH_REPORT; i++) {
-                        fileContentsMonth = WorkWithCSV.readFileContentsOrNull("resources/" + "m.20210"
-                                + i + ".csv");
+                        fileContentsMonth = WorkWithCSV.readFileContentsOrNull(pathToCSV + "m.2021"
+                                + ((i < 10) ? ("0" + i) : i) + ".csv"); // тернарный оператор
                         if (fileContentsMonth != null) {
                             monthReport[i - 1] = WorkWithCSV.splitMonthLine(fileContentsMonth);
-                            System.out.println("Отчёт за месяц " + GetMonth(i) + " был успешно загружен\n");
+                            System.out.println("Отчёт за месяц " + GetMonth(i-1) + " был успешно загружен\n");
                         }
                     }
                     break;
                 case 2:
-                    fileContentsYear = WorkWithCSV.readFileContentsOrNull("resources/y.2021.csv");
+                    fileContentsYear = WorkWithCSV.readFileContentsOrNull(pathToCSV + "y.2021.csv");
                     if (fileContentsYear != null) {
                         yearReport = WorkWithCSV.splitYearLine(fileContentsYear);
                         System.out.println("Отчёт за год был успешно загружен\n");
@@ -119,12 +120,19 @@ public class Main {
     }
 
     public static String GetMonth(int numberMonth) {
-        if (numberMonth == 0) {
-            return "январь";
-        } else if (numberMonth == 1) {
-            return "февраль";
-        } else {
-            return "март";
-        }
+        String[] months = new String[] {
+                "январь",
+                "февраль",
+                "март",
+                "апрель",
+                "май",
+                "июнь",
+                "июль",
+                "август",
+                "сентябрь",
+                "октябрь",
+                "ноябрь",
+                "декабрь"};
+        return months[numberMonth];
     }
 }
